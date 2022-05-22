@@ -34,7 +34,7 @@ const SearchResults = props => {
           })}
         </tbody>
       </table>
-      <CustomerProfile id={selectedId} />
+      {selectedId ? <CustomerProfile id={selectedId} /> : null}
     </>
   );
 };
