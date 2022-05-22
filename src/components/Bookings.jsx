@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Search from "../Search.js";
 import SearchResults from "./SearchResults.jsx";
+import CustomerProfile from "./CustomerProfile";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const [initialBookings, setInitialBookings] = useState([]);
+
   const API_URL = "https://cyf-react.glitch.me";
 
   const search = searchVal => {
@@ -14,8 +16,8 @@ const Bookings = () => {
     }
     const filteredBookings = bookings.filter(
       booking =>
-        booking.firstName.toLowerCase.includes(searchVal.toLowerCase()) ||
-        booking.surname.toLowerCase.includes(searchVal.toLowerCase())
+        booking.firstName.toLowerCase().includes(searchVal.toLowerCase()) ||
+        booking.surname.toLowerCase().includes(searchVal.toLowerCase())
     );
     setBookings(filteredBookings);
   };
