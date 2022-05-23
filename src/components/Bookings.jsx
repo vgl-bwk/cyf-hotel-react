@@ -6,8 +6,10 @@ import CustomerProfile from "./CustomerProfile";
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const [initialBookings, setInitialBookings] = useState([]);
-
-  const API_URL = "https://cyf-react.glitch.me";
+  const [loading, setLoading] = useState(false);
+  const API_URL = "https://cyf-react.glitch.me/error";
+  /*const API_URL = "https://cyf-react.glitch.me/delayed";*/
+  const [error, setError] = useState("");
 
   const search = searchVal => {
     if (searchVal.length === 0) {
@@ -23,18 +25,24 @@ const Bookings = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetch(API_URL)
       .then(data => data.json())
       .then(json => {
-        setBookings(json);
-        setInitialBookings(json);
+        /*setBookings(json);
+        setInitialBookings(json);*/
+        setError(json.error);
+        setLoading(false);
       });
   }, []);
 
   console.log(bookings);
 
-  return (
+  return loading ? (
+    <h3>Loading...</h3>
+  ) : (
     <div className="App-content">
+      <h3 style={{ color: "red" }}>{error}</h3>
       <div className="container">
         <Search search={search} />
         <SearchResults result={bookings} />
